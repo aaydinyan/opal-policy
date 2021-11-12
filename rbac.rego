@@ -38,18 +38,40 @@ allow {
 #}
 
 # Allow the action if the user is granted permission to perform the action.
-allow {
-	# Find permissions for the user.
-	some permission
-	user_is_granted[permission]
+# allow {
+# 	# Find permissions for the user.
+# 	some permission
+# 	user_is_granted[permission]
 
-	# Check if the permission permits the action.
-	input.action == permission.action
-	input.type == permission.type
-    
-    # unless user location is outside US
-    country := data.users[input.user]["location"]["country"]
-    country == "US"
+# 	# Check if the permission permits the action.
+# 	input.action == permission.action
+# 	input.type == permission.type
+# }
+
+allow {
+	some roles
+	user_roles[roles]
+
+	input.method = "GET"
+	input.path = ["audiences", name]
+	# roles[_] = "agency_admin"
+
+	# data.audiences[_].owner = input.user
+
+	allowed[audience]
+  	audience.name = name
+}
+
+#allow owners to access their audiences
+allowed[audience] {
+	audience = data.audiences[_]
+	audience.owner = input.user
+}
+
+#allow business entities to access their audiences
+allowed[audience] {
+  audience = data.audiences[_]
+  audience.business_entity = data.users[input.user]["business_entity"]
 }
 
 # user_is_admin is true if...
@@ -72,4 +94,8 @@ user_is_granted[permission] {
 
 	# `permission` assigned a single permission from the permissions list for 'role'...
 	permission := data.role_permissions[role][j]
+}
+
+user_roles[roles] {
+	roles := data.users[input.user]["roles"]
 }

@@ -4,76 +4,60 @@
             "roles": [
                 "admin"
             ],
-            "location": {
-                "country": "US",
-                "ip": "8.8.8.8"
-            }
+            "business_entity": "VideoAmp"
         },
         "bob": {
             "roles": [
-                "employee",
-                "billing"
+                "agency_admin", "support"
             ],
-            "location": {
-                "country": "US",
-                "ip": "8.8.8.8"
-            }
+            "business_entity": "Bacardi"
         },
         "eve": {
             "roles": [
-                "customer"
+                "agency_user"
             ],
-            "location": {
-                "country": "US",
-                "ip": "8.8.8.8"
-            }
+            "business_entity": "Cadillac"
         }
     },
     "role_permissions": {
-        "customer": [
+        "agency_user": [
             {
                 "action": "read",
-                "type": "dog"
-            },
-            {
-                "action": "read",
-                "type": "cat"
-            },
-            {
-                "action": "adopt",
-                "type": "dog"
-            },
-            {
-                "action": "adopt",
-                "type": "cat"
+                "type": "audience"
             }
         ],
-        "employee": [
+        "support": [
             {
                 "action": "read",
-                "type": "dog"
+                "type": "audience"
             },
             {
-                "action": "read",
-                "type": "cat"
-            },
-            {
-                "action": "update",
-                "type": "dog"
-            },
-            {
-                "action": "update",
-                "type": "cat"
+                "action": "debug",
+                "type": "audience"
             }
         ],
-        "billing": [
+        "agency_admin": [
             {
                 "action": "read",
-                "type": "finance"
+                "type": "audience"
             },
             {
-                "action": "update",
-                "type": "finance"
+                "action": "modify",
+                "type": "audience"
+            }
+        ],
+        "admin": [
+            {
+                "action": "read",
+                "type": "audience"
+            },
+            {
+                "action": "modify",
+                "type": "audience"
+            },
+            {
+                "action": "delete",
+                "type": "audience"
             }
         ]
     }
