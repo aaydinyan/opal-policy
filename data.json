@@ -10,7 +10,14 @@
             "roles": [
                 "agency_admin", "support"
             ],
+<<<<<<< HEAD
             "business_entity": "Bacardi"
+=======
+            "location": {
+                "country": "CA",
+                "ip": "8.8.8.8"
+            }
+>>>>>>> 81e9e2282cdff6978f3d9fe1283360527150f3a2
         },
         "eve": {
             "roles": [
